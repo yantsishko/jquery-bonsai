@@ -109,7 +109,7 @@
       }
       else {
         $li = $($li).addClass('collapsed')
-          .removeClass('expanded');
+            .removeClass('expanded');
         $($li.data('subList')).height(0);
       }
       return $li;
@@ -198,7 +198,7 @@
       if (listItem.find('> input[type=' + type + ']').length) return;
       var id = this.inputIdFor(listItem);
       var checkbox = $('<input type="' + type + '" name="'
-        + this.inputNameFor(listItem) + '" id="' + id + '" /> '
+          + this.inputNameFor(listItem) + '" id="' + id + '" /> '
       );
       var children = listItem.children();
       // get the first text node for the label
@@ -209,10 +209,10 @@
       checkbox.prop('checked', listItem.data('checked'))
       children.detach();
       listItem.append(checkbox)
-        .append(
-          $('<label for="' + id + '">').append(text.length > 0 ? text : children.first())
-        )
-        .append(text.length > 0 ? children : children.slice(1));
+          .append(
+              $('<label class="thumb">').append(text.length > 0 ? text : children.first())
+          )
+          .append(text.length > 0 ? children : children.slice(1));
     },
     checkboxPrefix: 'bonsai-checkbox-',
     inputIdFor: function(listItem) {
@@ -224,7 +224,7 @@
     },
     inputNameFor: function(listItem) {
       return listItem.data('name')
-        || listItem.parents().filter('[data-name]').data('name');
+          || listItem.parents().filter('[data-name]').data('name');
     },
     handleDuplicateCheckboxes: function() {
       var self = this;
@@ -233,9 +233,9 @@
         if (!checkbox.val()) return;
         // select all duplicate checkboxes that need to be updated
         var selector = 'input[type=checkbox]'
-          + '[value="' + checkbox.val() + '"]'
-          + (checkbox.attr('name') ? '[name="' + checkbox.attr('name') + '"]' : '')
-          + (checkbox.prop('checked') ? ':not(:checked)' : ':checked');
+            + '[value="' + checkbox.val() + '"]'
+            + (checkbox.attr('name') ? '[name="' + checkbox.attr('name') + '"]' : '')
+            + (checkbox.prop('checked') ? ':not(:checked)' : ':checked');
         self.el.find(selector).prop({
           checked: checkbox.prop('checked'),
           indeterminate: checkbox.prop('indeterminate')
@@ -245,18 +245,18 @@
     addExpandAllLink: function() {
       var self = this;
       $('<div class="expand-all">')
-        .append(
-          $('<a class="all">Expand all</a>').on('click', function() {
-            self.expandAll();
-          })
-        )
-        .append('<i class="separator"></i>')
-        .append(
-          $('<a class="none">Collapse all</a>').on('click', function() {
-            self.collapseAll();
-          })
-        )
-        .insertBefore(this.el);
+          .append(
+              $('<a class="all">Expand all</a>').on('click', function() {
+                self.expandAll();
+              })
+          )
+          .append('<i class="separator"></i>')
+          .append(
+              $('<a class="none">Collapse all</a>').on('click', function() {
+                self.collapseAll();
+              })
+          )
+          .insertBefore(this.el);
     },
     addSelectAllLink: function() {
       var scope = this.options.scope;
@@ -264,38 +264,38 @@
       function getCheckboxes() {
         // return all checkboxes that are not in hidden list items
         return scope.find('li')
-          .filter(self.options.selectAllExclude || function() {
-            return $(this).css('display') != 'none';
-          })
-          .find('> input[type=checkbox]');
+            .filter(self.options.selectAllExclude || function() {
+                  return $(this).css('display') != 'none';
+                })
+            .find('> input[type=checkbox]');
       }
       $('<div class="check-all">')
-        .append($('<a class="all">Select all</a>')
-          .css('cursor', 'pointer')
-          .on('click', function() {
-            getCheckboxes().prop({
-              checked: true,
-              indeterminate: false
-            });
-          }))
-        .append('<i class="separator"></i>')
-        .append($('<a class="none">Select none</a>')
-          .css('cursor', 'pointer')
-          .on('click', function() {
-            getCheckboxes().prop({
-              checked: false,
-              indeterminate: false
-            });
-          })
-      )
-        .insertAfter(this.el);
+          .append($('<a class="all">Select all</a>')
+              .css('cursor', 'pointer')
+              .on('click', function() {
+                getCheckboxes().prop({
+                  checked: true,
+                  indeterminate: false
+                });
+              }))
+          .append('<i class="separator"></i>')
+          .append($('<a class="none">Select none</a>')
+              .css('cursor', 'pointer')
+              .on('click', function() {
+                getCheckboxes().prop({
+                  checked: false,
+                  indeterminate: false
+                });
+              })
+          )
+          .insertAfter(this.el);
     },
     setCheckedValues: function(values) {
       var all = this.options.scope.find('input[type=checkbox]');
       $.each(values, function(key, value) {
         all.filter('[value="' + value + '"]')
-          .prop('checked', true)
-          .trigger('change');
+            .prop('checked', true)
+            .trigger('change');
       });
     }
   };
